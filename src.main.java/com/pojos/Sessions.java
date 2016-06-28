@@ -7,10 +7,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Sessions 
 {
-	
 	private int sessionNo;
-	private Date startDate;
-	private Date endDate;
+	private Date date;
 	private Date startTime;
 	private Date endTime;
 	private String venue;
@@ -21,17 +19,11 @@ public class Sessions
 	public void setSessionNo(int sessionNo) {
 		this.sessionNo = sessionNo;
 	}
-	public Date getStartDate() {
-		return startDate;
+	public Date getDate() {
+		return date;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public Date getStartTime() {
 		return startTime;

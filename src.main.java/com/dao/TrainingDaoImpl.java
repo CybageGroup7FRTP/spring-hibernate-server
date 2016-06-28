@@ -35,13 +35,16 @@ public class TrainingDaoImpl implements TrainingDao
 				System.out.println(c1.getTime());
 				Sessions sess = new Sessions();
 				sess.setSessionNo(i+1);
-				/*sess.se
-				sessions.add()*/
+				sess.setDate(c1.getTime());
+				sess.setVenue(training.getLocation());
+				sess.setStartTime(training.getStartTime());
+				sess.setEndTime(training.getEndTime());
+				sessions.add(sess);
 				System.out.println(i);
 			} else
 				i--;
 		}
-
+		training.setSessions(sessions);
 		Session sess = sf.openSession();
 		Transaction tx = sess.getTransaction();
 		tx.begin();
