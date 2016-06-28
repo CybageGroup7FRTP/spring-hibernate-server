@@ -13,7 +13,6 @@ public class Sessions
 	private Date endDate;
 	private Date startTime;
 	private Date endTime;
-	private int id;
 	private String venue;
 	
 	public int getSessionNo() {
@@ -45,12 +44,6 @@ public class Sessions
 	}
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getVenue() {
 		return venue;

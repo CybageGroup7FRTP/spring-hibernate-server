@@ -2,22 +2,22 @@ package com.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.dao.LoginDao;
 import com.dao.TrainingDao;
 import com.pojos.User;
 
 @Service
-@Transactional
-public class TrainingValidationService 
+public class LoginServiceImpl implements LoginService
 {
 	@Autowired
-	private TrainingDao tdao;
-	
+	private LoginDao loginDao;
+
+	@Override
 	public String validateUser(User user)
 	{
+		// TODO Auto-generated method stub
 		System.out.println(user.getUsername());
-		return tdao.validateUser(user);
+		return loginDao.validateUser(user);
 	}
-	
 }

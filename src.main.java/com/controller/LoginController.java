@@ -1,6 +1,6 @@
 package com.controller;
 
-import java.util.Date;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pojos.User;
-import com.service.TrainingValidationService;
+import com.service.LoginService;
+
 
 @RestController
 public class LoginController 
 {
 	@Autowired
-	private TrainingValidationService tvs;
+	private LoginService loginservice;
 	
 	public LoginController() 
 	{
@@ -31,7 +31,7 @@ public class LoginController
 	public @ResponseBody User validateUser(@RequestBody User user)/*@RequestParam(value="username") String username, @RequestParam(value="password") String password*/
 	{
 		System.out.println("username"+user.getUsername());
-		String role = tvs.validateUser(user);
+		String role = loginservice.validateUser(user);
 		User u = new User();
 		u.setEmpType(role);
 		return u;

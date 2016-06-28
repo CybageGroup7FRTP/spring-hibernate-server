@@ -25,9 +25,9 @@ public class Training
 	private int vacancy;
 	private String location;
 	private int duration;
-	private int trainingExecId;
+	private String trainingExecutive;
 	private String type;
-	private int trainerId;
+	private String trainerName;
 	private String targetedAudience;
 	
 	@ElementCollection
@@ -108,12 +108,12 @@ public class Training
 		this.duration = duration;
 	}
 
-	public int getTrainingExecId() {
-		return trainingExecId;
+	public String getTrainingExecutive() {
+		return trainingExecutive;
 	}
 
-	public void setTrainingExecId(int trainingExecId) {
-		this.trainingExecId = trainingExecId;
+	public void setTrainingExecId(String trainingExecutive) {
+		this.trainingExecutive = trainingExecutive;
 	}
 
 	public String getType() {
@@ -124,12 +124,12 @@ public class Training
 		this.type = type;
 	}
 
-	public int getTrainerId() {
-		return trainerId;
+	public String getTrainerName() {
+		return trainerName;
 	}
 
-	public void setTrainerId(int trainerId) {
-		this.trainerId = trainerId;
+	public void setTrainerName(String trainerName) {
+		this.trainerName = trainerName;
 	}
 
 	public String getTargetedAudience() {
