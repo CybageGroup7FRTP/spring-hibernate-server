@@ -12,7 +12,7 @@ import com.pojos.User;
 public interface TrainingService
 {
 	public String registerTraining(Training training);
-	public List<Training> searchTraining(User user);
+	public List<Training> searchTraining(Training training);
 	public String deleteTraining(Training training);
 	
 }

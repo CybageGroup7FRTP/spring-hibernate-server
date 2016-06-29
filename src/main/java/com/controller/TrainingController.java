@@ -33,9 +33,9 @@ public class TrainingController
 	
 	@CrossOrigin
 	@RequestMapping(value="/searchtraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<Training> registerTraining(@RequestBody User user)
+	public @ResponseBody List<Training> searchTraining(@RequestBody Training training)
 	{
-		return trainingService.searchTraining(user);
+		return trainingService.searchTraining(training);
 	}
 	
 	@CrossOrigin

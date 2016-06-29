@@ -10,5 +10,5 @@ import com.pojos.User;
 @Repository
 public interface LoginDao 
 {
-	public String validateUser(User user);
+	public User validateUser(User user);
 }

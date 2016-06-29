@@ -14,7 +14,7 @@ public class LoginServiceImpl implements LoginService
 	private LoginDao loginDao;
 
 	@Override
-	public String validateUser(User user)
+	public User validateUser(User user)
 	{
 		// TODO Auto-generated method stub
 		System.out.println(user.getUsername());

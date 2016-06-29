@@ -36,9 +36,7 @@ public class LoginController
 	public @ResponseBody User validateUser(@RequestBody User user1)/*@RequestParam(value="username") String username, @RequestParam(value="password") String password*/
 	{
 		System.out.println("username = "+user1.getUsername());
-		String role = loginservice.validateUser(user1);
-		User u = new User();
-		u.setEmpType(role);
+		User u = loginservice.validateUser(user1);
 		return u;
 	} 
 }

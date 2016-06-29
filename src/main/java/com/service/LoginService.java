@@ -7,5 +7,5 @@ import com.pojos.User;
 @Service
 public interface LoginService
 {
-	public String validateUser(User user);
+	public User validateUser(User user);
 }

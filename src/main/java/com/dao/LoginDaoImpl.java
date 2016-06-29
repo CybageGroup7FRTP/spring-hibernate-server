@@ -24,7 +24,7 @@ public class LoginDaoImpl implements LoginDao
 	
 	@Override
 	@Transactional
-	public String validateUser(User user)
+	public User validateUser(User user)
 	{
 		Session sess = sf.openSession();
 		Transaction tx = sess.getTransaction();
@@ -36,12 +36,15 @@ public class LoginDaoImpl implements LoginDao
 		if (result.size() == 1)
 		{
 			System.out.println(" working " + result.get(0).getEmpType());
-			return result.get(0).getEmpType();
+			user.setEmpId(result.get(0).getEmpId());
+			user.setEmpType(result.get(0).getEmpType());
+			user.setUsername(result.get(0).getEmpType());
+			return user;
 		} else
 		{
 			System.out.println("Not working");
 			user.setEmpType("noemp");
-			return user.getEmpType();
+			return user;
 		}
 	}
 }

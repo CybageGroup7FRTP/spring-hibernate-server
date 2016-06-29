@@ -63,12 +63,15 @@ public class TrainingDaoImpl implements TrainingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Training> searchTraining(User user) {
-		Session sess = sf.getCurrentSession();
+	public List<Training> searchTraining(Training training) {
+		Session sess = sf.openSession();
+		Transaction tx = sess.getTransaction();
+		tx.begin();
 		Query q = sess.createQuery("from Training t where t.targetedAudience = :targetedAudience")
-				.setParameter(":targetedAudience", empDao.getEmployeeDept(user));
-		List<Training> training = (List<Training>) q.list();
-		return training;
+				.setParameter("targetedAudience", empDao.getEmployeeDept(training));
+		List<Training> trainingSet = (List<Training>) q.list();
+		tx.commit();
+		return trainingSet;
 
 	}
 

@@ -23,10 +23,10 @@ public class TrainingServiceImpl implements TrainingService
 	}
 	
 	@Override
-	public List<Training> searchTraining(User user) 
+	public List<Training> searchTraining(Training training) 
 	{
 		// TODO Auto-generated method stub
-		return trainingDao.searchTraining(user);
+		return trainingDao.searchTraining(training);
 	}
 		
 	@Override
