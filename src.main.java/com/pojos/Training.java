@@ -36,6 +36,7 @@ public class Training
 	private String location;
 	
 	private int duration;
+<<<<<<< HEAD
 	
 	private String trainingExecutive;
 	
@@ -43,6 +44,11 @@ public class Training
 	
 	private String trainerName;
 	
+=======
+	private int trainingExecId;
+	private String type;
+	private int trainerId;
+>>>>>>> 71f4f9ea96de5c0445512e6bdef22919574e2809
 	private String targetedAudience;
 	
 	@ElementCollection
@@ -115,12 +121,12 @@ public class Training
 		this.duration = duration;
 	}
 
-	public String getTrainingExecutive() {
-		return trainingExecutive;
+	public int getTrainingExecId() {
+		return trainingExecId;
 	}
 
-	public void setTrainingExecId(String trainingExecutive) {
-		this.trainingExecutive = trainingExecutive;
+	public void setTrainingExecId(int trainingExecId) {
+		this.trainingExecId = trainingExecId;
 	}
 
 	public String getType() {
@@ -131,12 +137,12 @@ public class Training
 		this.type = type;
 	}
 
-	public String getTrainerName() {
-		return trainerName;
+	public int getTrainerId() {
+		return trainerId;
 	}
 
-	public void setTrainerName(String trainerName) {
-		this.trainerName = trainerName;
+	public void setTrainerId(int trainerId) {
+		this.trainerId = trainerId;
 	}
 
 	public String getTargetedAudience() {

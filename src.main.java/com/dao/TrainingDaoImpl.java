@@ -12,18 +12,20 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.pojos.Sessions;
 import com.pojos.Training;
 import com.pojos.User;
 
 @Configuration
 @Repository
-public class TrainingDaoImpl implements TrainingDao 
-{
+@Transactional
+public class TrainingDaoImpl implements TrainingDao {
 	// Autowiring sessionFactory
 	@Autowired
 	private SessionFactory sf;
-	
+
 	@Autowired
 	private EmployeeDao empDao;
 
@@ -37,10 +39,10 @@ public class TrainingDaoImpl implements TrainingDao
 		c1.setTime(d1);
 		for (int i = 0; i < n; c1.add(Calendar.DATE, 1), i++) {
 			if (c1.getTime().getDay() != 0 && c1.getTime().getDay() != 6) {
-	
+
 				System.out.println(c1.getTime());
 				Sessions sess = new Sessions();
-				sess.setSessionNo(i+1);
+				sess.setSessionNo(i + 1);
 				sess.setDate(c1.getTime());
 				sess.setVenue(training.getLocation());
 				sess.setStartTime(training.getStartTime());
@@ -58,15 +60,39 @@ public class TrainingDaoImpl implements TrainingDao
 		tx.commit();
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Training> searchTraining(User user) 
-	{
+	public List<Training> searchTraining(User user) {
 		Session sess = sf.getCurrentSession();
-		Query q = sess.createQuery("from Training t where t.targetedAudience = :targetedAudience").setParameter(":targetedAudience", empDao.getEmployeeDept(user));
+		Query q = sess.createQuery("from Training t where t.targetedAudience = :targetedAudience")
+				.setParameter(":targetedAudience", empDao.getEmployeeDept(user));
 		List<Training> training = (List<Training>) q.list();
- 		return training;
-		
+		return training;
+
+	}
+
+	// Persisting the customer object
+	public String validateUser(User user)
+	{
+			Session sess =  sf.openSession();
+			Transaction tx = sess.getTransaction();
+			tx.begin();
+			Query q = sess.createQuery("from User u where u.username= :username and password = :password")
+					.setParameter("username", user.getUsername())
+					.setParameter("password", user.getPassword());
+			tx.commit();
+			List<User> result = q.list();
+			if(result.size()==1)
+			{
+				System.out.println(" working "+result.get(0).getEmpType());
+				return result.get(0).getEmpType();
+			}
+			else
+			{
+				System.out.println("Not working");
+				user.setEmpType("noemp");
+				return user.getEmpType();
+			}
 	}
 }

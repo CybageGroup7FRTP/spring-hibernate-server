@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 
 import com.pojos.Training;
-import com.pojos.User;
 
 @Configuration
 @Repository
-public interface TrainingDao 
-{
+public class ShowTrainingTableImpl implements ShowTrainingTableDao {
 
-	public String registerTraining(Training training);
-	public List<Training> searchTraining(User user);
-	public String validateUser(User user);	
+	public List<Training> showTable() {
+		System.out.println("inside show dao");
+		return null;
+	}
+	
 
 }
