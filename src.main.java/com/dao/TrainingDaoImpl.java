@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 import com.pojos.Sessions;
 import com.pojos.Training;
+import com.pojos.User;
 
 @Configuration
 @Repository
@@ -20,6 +23,9 @@ public class TrainingDaoImpl implements TrainingDao
 	// Autowiring sessionFactory
 	@Autowired
 	private SessionFactory sf;
+	
+	@Autowired
+	private EmployeeDao empDao;
 
 	@Override
 	public String registerTraining(Training training) {
@@ -51,5 +57,16 @@ public class TrainingDaoImpl implements TrainingDao
 		sess.save(training);
 		tx.commit();
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Training> searchTraining(User user) 
+	{
+		Session sess = sf.getCurrentSession();
+		Query q = sess.createQuery("from Training t where t.targetedAudience = :targetedAudience").setParameter(":targetedAudience", empDao.getEmployeeDept(user));
+		List<Training> training = (List<Training>) q.list();
+ 		return training;
+		
 	}
 }

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table
@@ -17,17 +19,30 @@ public class Training
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int trainId;
+	
 	private String name;
+	
+	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	private Date stopDate;
+	
+	@Temporal(TemporalType.TIME)
 	private Date startTime;
+	
+	@Temporal(TemporalType.TIME)
 	private Date endTime;
+	
 	private int vacancy;
+	
 	private String location;
+	
 	private int duration;
+	
 	private String trainingExecutive;
+	
 	private String type;
+	
 	private String trainerName;
+	
 	private String targetedAudience;
 	
 	@ElementCollection
@@ -58,14 +73,6 @@ public class Training
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
-	}
-
-	public Date getStopDate() {
-		return stopDate;
-	}
-
-	public void setStopDate(Date stopDate) {
-		this.stopDate = stopDate;
 	}
 
 	public Date getStartTime() {
