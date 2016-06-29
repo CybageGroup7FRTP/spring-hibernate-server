@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.beans.CustomerBean;
 import com.pojos.Customer;
 import com.pojos.Training;
 import com.pojos.User;
-
+import com.service.CustomerServiceImpl;
 
 
 
@@ -28,22 +28,29 @@ public class HelloController
 		System.out.println("Hi");
 	}
 	
-	/*@Autowired
+	@Autowired
 	private CustomerServiceImpl csi;
-	*/
+	
 	@RequestMapping("/")
 	public  String indexPage()
 	{
-		return "Welcome To Training Spring Hibernate Rest WebService";
+		/*User u = new User();
+		u.setEmpId(112);
+		u.setEmpType("hello");
+		u.setPassword("iamukt");
+		u.setUsername("iamukt");
+		return u;
+		*/
+		//return new ModelAndView("registertraining.html");
+		return "hello Hibern";
+		//return "redirect:/views/registertraining.html"; 
 	}
-	
-	/*@RequestMapping(value="/add",method=RequestMethod.GET)
+	@RequestMapping(value="/add",method=RequestMethod.GET)
 	ModelAndView addCustomer()
 	{ 
 		ModelAndView modelView = new ModelAndView("feeddetails");
 		return modelView; 
 	}
-	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	ModelAndView addCustomerDetails(@ModelAttribute("customer") CustomerBean customer )
 	{
@@ -54,8 +61,8 @@ public class HelloController
 		System.out.println("csi"+csi);
 		modelView.addObject("msg","Successfully added into the database");
 		return modelView;
-	}*/
-	/*
+	}
+	
 	@RequestMapping(value="/registerTraining",method=RequestMethod.POST)
 	public @ResponseBody Training registerTrainingDetails(
 			@RequestParam(value="name") String trainername, @RequestParam(value="startDate") Date date)
@@ -65,5 +72,5 @@ public class HelloController
 		training.setName(trainername);
 		training.setStartDate(date);
 		return training;
-	}*/
+	}
 }

@@ -3,12 +3,12 @@ package com.dao;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 
-import com.pojos.User;
+import com.pojos.Training;
 
 @Configuration
 @Repository
-public interface TrainingDao 
-{
-	public String validateUser(User user);
+public interface DeleteTrainingDao {
 	
+	public String deleteTraining(Training training);
+
 }
