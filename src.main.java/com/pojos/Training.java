@@ -36,19 +36,10 @@ public class Training
 	private String location;
 	
 	private int duration;
-<<<<<<< HEAD
-	
-	private String trainingExecutive;
-	
-	private String type;
-	
-	private String trainerName;
-	
-=======
+
 	private int trainingExecId;
 	private String type;
 	private int trainerId;
->>>>>>> 71f4f9ea96de5c0445512e6bdef22919574e2809
 	private String targetedAudience;
 	
 	@ElementCollection

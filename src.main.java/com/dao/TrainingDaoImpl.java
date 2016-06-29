@@ -95,4 +95,19 @@ public class TrainingDaoImpl implements TrainingDao {
 				return user.getEmpType();
 			}
 	}
+	
+	
+	@Transactional
+	public String deleteTraining(Training training) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		String name = training.getName();
+		String hql = "delete from Training where name =:name";
+		session.createQuery(hql).setString("name",name).executeUpdate();
+		tx.commit();
+		
+		System.out.println("Deletion Successful");
+		return null;
+	}
 }

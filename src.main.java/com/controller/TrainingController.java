@@ -37,4 +37,14 @@ public class TrainingController
 	{
 		return trainingService.searchTraining(user);
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/delete",method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody void removeTraining(@RequestBody Training training)
+	{
+		
+		System.out.println("Training to be deleted is: "+training.getName());
+		System.out.println("inside delete training method");
+		trainingService.deleteTraining(training);
+	} 
 }

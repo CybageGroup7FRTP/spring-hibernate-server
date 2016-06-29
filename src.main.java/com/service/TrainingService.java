@@ -13,5 +13,6 @@ public interface TrainingService
 {
 	public String registerTraining(Training training);
 	public List<Training> searchTraining(User user);
+	public String deleteTraining(Training training);
 	
 }

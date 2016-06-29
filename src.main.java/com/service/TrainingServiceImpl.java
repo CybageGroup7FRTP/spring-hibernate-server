@@ -29,6 +29,12 @@ public class TrainingServiceImpl implements TrainingService
 		return trainingDao.searchTraining(user);
 	}
 		
+	@Override
+	public String deleteTraining(Training training) 
+	{
+		System.out.println("Service method ..trng name received as = " +training.getName());
+		return trainingDao.deleteTraining(training);
+	}
 
 	
 	
