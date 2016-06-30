@@ -17,15 +17,25 @@ import org.hibernate.annotations.Parameter;
 @Table
 public class EmpRecord 
 {
-	private int empId;
-	private String empName;
-	private String empDesg;
-	private String empDept;
-	private User user;
-	
 	@Id
 	@GeneratedValue(generator="foreignkey")
 	@GenericGenerator(name="foreignkey", strategy="foreign",parameters = { @Parameter(value="user",name="property"),@Parameter(value="user",name="property") })
+	private int empId;
+	
+	@Column(nullable=false)
+	private String empName;
+	
+	private String empDesg;
+	
+	@Column(nullable=false)
+	private String empDept;
+	
+	private String groupName;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="empId")
+	private User user;
+	
 	public int getEmpId() {
 		return empId;
 	}
@@ -34,7 +44,6 @@ public class EmpRecord
 		this.empId=empId;
 	}
 	
-	@Column(nullable=false)
 	public String getEmpName() {
 		return empName;
 	}
@@ -52,7 +61,6 @@ public class EmpRecord
 		this.empDesg = empDesg;
 	}
 
-	@Column(nullable=false)
 	public String getEmpDept() {
 		return empDept;
 	}
@@ -61,8 +69,6 @@ public class EmpRecord
 		this.empDept = empDept;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="empId")
 	public User getUser() {
 		return user;
 	}
@@ -70,5 +76,15 @@ public class EmpRecord
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	
+	
 	
 }

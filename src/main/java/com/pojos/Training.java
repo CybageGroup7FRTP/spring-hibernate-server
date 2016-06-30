@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -17,17 +20,27 @@ public class Training
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int trainId;
+	
 	private String name;
+	
+	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	private Date stopDate;
+	
+	@Temporal(TemporalType.TIME)
 	private Date startTime;
+	
+	@Temporal(TemporalType.TIME)
 	private Date endTime;
+	
 	private int vacancy;
+	
 	private String location;
+	
 	private int duration;
-	private String trainingExecutive;
+
+	private int trainingExecId;
 	private String type;
-	private String trainerName;
+	private int trainerId;
 	private String targetedAudience;
 	
 	@ElementCollection
@@ -35,6 +48,9 @@ public class Training
 
 	@ElementCollection
 	private List<Sessions> sessions; 
+	
+	@Transient
+	private String nominate;
 	
 	public int getTrainId() {
 		return trainId;
@@ -58,14 +74,6 @@ public class Training
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
-	}
-
-	public Date getStopDate() {
-		return stopDate;
-	}
-
-	public void setStopDate(Date stopDate) {
-		this.stopDate = stopDate;
 	}
 
 	public Date getStartTime() {
@@ -108,12 +116,12 @@ public class Training
 		this.duration = duration;
 	}
 
-	public String getTrainingExecutive() {
-		return trainingExecutive;
+	public int getTrainingExecId() {
+		return trainingExecId;
 	}
 
-	public void setTrainingExecId(String trainingExecutive) {
-		this.trainingExecutive = trainingExecutive;
+	public void setTrainingExecId(int trainingExecId) {
+		this.trainingExecId = trainingExecId;
 	}
 
 	public String getType() {
@@ -124,12 +132,12 @@ public class Training
 		this.type = type;
 	}
 
-	public String getTrainerName() {
-		return trainerName;
+	public int getTrainerId() {
+		return trainerId;
 	}
 
-	public void setTrainerName(String trainerName) {
-		this.trainerName = trainerName;
+	public void setTrainerId(int trainerId) {
+		this.trainerId = trainerId;
 	}
 
 	public String getTargetedAudience() {
@@ -154,6 +162,14 @@ public class Training
 
 	public void setSessions(List<Sessions> sessions) {
 		this.sessions = sessions;
+	}
+
+	public String getNominate() {
+		return nominate;
+	}
+
+	public void setNominate(String nominate) {
+		this.nominate = nominate;
 	}
 
 	

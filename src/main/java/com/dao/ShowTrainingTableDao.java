@@ -1,14 +1,18 @@
 package com.dao;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 
-import com.pojos.User;
+import com.pojos.Training;
 
 
 @Configuration
 @Repository
-public interface LoginDao 
-{
-	public String validateUser(User user);
+public interface ShowTrainingTableDao {
+	
+	public List<Training> showTable();
+	
+
 }
