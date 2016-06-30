@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding.Use;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -53,6 +55,18 @@ public class TrainingDaoImpl implements TrainingDao {
 				i--;
 		}
 		training.setSessions(sessions);
+		String nominationList = training.getNominate();
+		if(nominationList.contains("#"))
+		{
+			training.setTraineeempId(empDao.getEmployeeIdFromGroup(training));
+		}
+		else
+		{
+			List<Integer> nomination = new ArrayList<>();
+			nomination.add(Integer.parseInt(nominationList));
+			training.setTraineeempId(nomination);
+		}
+		
 		Session sess = sf.openSession();
 		Transaction tx = sess.getTransaction();
 		tx.begin();
@@ -108,6 +122,7 @@ public class TrainingDaoImpl implements TrainingDao {
 	}
 	
 	
+	@Override
 	@Transactional
 	public String deleteTraining(Training training) {
 		Session session = sf.openSession();
@@ -120,5 +135,69 @@ public class TrainingDaoImpl implements TrainingDao {
 		
 		System.out.println("Deletion Successful");
 		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Sessions> listSessions(Training training) {
+		// TODO Auto-generated method stub
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		String name = training.getName();
+		session.createQuery("from Session s ").setString("name",name).executeUpdate();
+		List<Sessions> trainingSessions = (List<Sessions>) session.createSQLQuery("select * from Training_sessions where Training_trainId = ?").setInteger(0, training.getTrainId()).list();
+		tx.commit();
+		
+		return trainingSessions;
+		
+	}
+	
+	@Override
+	public List<Training> listmytrainings(User user) {
+		
+		Session session = sf.openSession();
+		List<Training> trainingList = new ArrayList<>();
+		List<Integer> list = session.createSQLQuery("select Training_trainId from training_traineeempid where traineeempId = ?").setInteger(0, user.getEmpId()).list();
+		for(Integer i : list)
+		{
+			Training training = session.get(Training.class, i);
+			trainingList.add(training);
+		}
+		return trainingList;
+	}
+	
+	@Override
+	public boolean nominateIntoTraining(Training training) {
+		// TODO Auto-generated method stub
+		List<Integer> list = training.getTraineeempId();
+		if(list.add(Integer.parseInt(training.getNominate())))
+		{
+			Session session = sf.openSession();
+			Transaction tx = session.beginTransaction();
+			training.setTraineeempId(list);
+			session.save(training);
+			tx.commit();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean withdrawFromTraining(Training training) {
+		// TODO Auto-generated method stub
+		
+		List<Integer> list = training.getTraineeempId();
+		if(list.remove(Integer.parseInt(training.getNominate()))==1)
+		{
+			Session session = sf.openSession();
+			Transaction tx = session.beginTransaction();
+			training.setTraineeempId(list);
+			session.save(training);
+			tx.commit();
+			return true;
+		}
+		return false;
 	}
 }

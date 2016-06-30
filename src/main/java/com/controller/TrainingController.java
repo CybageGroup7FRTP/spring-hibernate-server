@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.pojos.Sessions;
 import com.pojos.Training;
 import com.pojos.User;
 import com.service.TrainingService;
@@ -46,5 +46,28 @@ public class TrainingController
 		System.out.println("Training to be deleted is: "+training.getName());
 		System.out.println("inside delete training method");
 		trainingService.deleteTraining(training);
-	} 
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/listsessions",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Sessions> listsessions(@RequestBody Training training)
+	{
+		return trainingService.listSessions(training);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/nominatefortraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody boolean nominateIntoTraining(@RequestBody Training training)
+	{
+		return trainingService.nominateIntoTraining(training);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/withdrawfortraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody boolean withdrawFromTraining(@RequestBody Training training)
+	{
+		return trainingService.withdrawFromTraining(training);
+	}
+	
+	
 }

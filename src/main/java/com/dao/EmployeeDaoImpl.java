@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,5 +31,12 @@ public class EmployeeDaoImpl implements EmployeeDao
 		System.out.println("Emp Dept: "+employee.getEmpDept());
 		tx.commit();
 		return employee.getEmpDept();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Integer> getEmployeeIdFromGroup(Training training) {
+		
+		return (List<Integer>) sf.openSession().createQuery("from EmpRecord e where e.groupName = :name").setParameter("name", training.getNominate()).list();
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.EmployeeDao;
 import com.dao.TrainingDao;
+import com.pojos.Sessions;
 import com.pojos.Training;
 import com.pojos.User;
 
@@ -36,6 +37,21 @@ public class TrainingServiceImpl implements TrainingService
 		return trainingDao.deleteTraining(training);
 	}
 
+	@Override
+	public List<Sessions> listSessions(Training training) {
+		return trainingDao.listSessions(training);
+	}
 	
+	@Override
+	public boolean nominateIntoTraining(Training training) {
+		// TODO Auto-generated method stub
+		return trainingDao.nominateIntoTraining(training);
+	}
+	
+	@Override
+	public boolean withdrawFromTraining(Training training) {
+		// TODO Auto-generated method stub
+		return trainingDao.withdrawFromTraining(training);
+	}
 	
 }

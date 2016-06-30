@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -47,6 +48,9 @@ public class Training
 
 	@ElementCollection
 	private List<Sessions> sessions; 
+	
+	@Transient
+	private String nominate;
 	
 	public int getTrainId() {
 		return trainId;
@@ -158,6 +162,14 @@ public class Training
 
 	public void setSessions(List<Sessions> sessions) {
 		this.sessions = sessions;
+	}
+
+	public String getNominate() {
+		return nominate;
+	}
+
+	public void setNominate(String nominate) {
+		this.nominate = nominate;
 	}
 
 	
