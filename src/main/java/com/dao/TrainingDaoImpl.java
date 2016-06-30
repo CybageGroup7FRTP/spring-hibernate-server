@@ -67,8 +67,16 @@ public class TrainingDaoImpl implements TrainingDao {
 		Session sess = sf.openSession();
 		Transaction tx = sess.getTransaction();
 		tx.begin();
-		Query q = sess.createQuery("from Training t where t.targetedAudience = :targetedAudience")
-				.setParameter("targetedAudience", empDao.getEmployeeDept(training));
+		Query q = sess.createQuery("from Training t where t.targetedAudience like ? and t.name like ?")
+				.setString(0, empDao.getEmployeeDept(training))
+				.setString(1, "%"+training.getName()+"%");
+			
+				
+				/*.setParameter("targetedAudience", empDao.getEmployeeDept(training))
+				.setParameter("name",'%'++'%');*/
+		
+		/*Query q = sess.createSQLQuery("select * from Training where targetedAudience like ? "
+				+ " and name like ?").setP*/
 		List<Training> trainingSet = (List<Training>) q.list();
 		tx.commit();
 		return trainingSet;
