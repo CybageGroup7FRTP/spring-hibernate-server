@@ -18,5 +18,7 @@ public interface TrainingService
 	public List<Sessions> listSessions(Training trianing);
 	public boolean nominateIntoTraining(Training training);
 	public boolean withdrawFromTraining(Training training);
+	public List<Training> trainingsaddedbyme(Training training);
+	public List<Training> trainingsConduct(Training training);
 	
 }

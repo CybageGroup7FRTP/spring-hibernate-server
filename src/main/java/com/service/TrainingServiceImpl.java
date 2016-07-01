@@ -54,4 +54,16 @@ public class TrainingServiceImpl implements TrainingService
 		return trainingDao.withdrawFromTraining(training);
 	}
 	
+	@Override
+	public List<Training> trainingsaddedbyme(Training training) {
+		// TODO Auto-generated method stub
+		return trainingDao.trainingsaddedbyme(training);
+	}
+	
+	@Override
+	public List<Training> trainingsConduct(Training training) {
+		// TODO Auto-generated method stub
+		return trainingDao.trainingsConduct(training);
+	}
+	
 }

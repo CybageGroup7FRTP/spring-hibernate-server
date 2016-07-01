@@ -206,4 +206,32 @@ public class TrainingDaoImpl implements TrainingDao {
 		}
 		return false;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Training> trainingsaddedbyme(Training training) {
+		// TODO Auto-generated method stub
+		Session session = sf.openSession();
+		List<Training> traininglist = session.createQuery("from Training t where t.trainingExecId = :trainingExecId").setParameter("trainingExecId", training.getTrainingExecId()).list();
+		System.out.println("Training List"+traininglist);
+		return traininglist;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public List<Training> trainingsConduct(Training training) {
+		// TODO Auto-generated method stub
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		tx.begin();
+		List<Training> traininglist = session.createQuery("From Training t where t.trainerId = :trainerId").setParameter("trainerId", training.getTrainerId()).list();
+		tx.commit();
+		System.out.println("Training List"+traininglist);
+		return traininglist;
+	}
+	
+	
+	
+	
 }
