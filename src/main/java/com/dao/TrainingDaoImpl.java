@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pojos.EmpRecord;
 import com.pojos.Sessions;
 import com.pojos.Training;
 import com.pojos.User;
@@ -35,6 +36,7 @@ public class TrainingDaoImpl implements TrainingDao {
 	public String registerTraining(Training training) {
 		// TODO Auto-generated method stub
 		List<Sessions> sessions = new ArrayList<>();
+		List<Integer> nomination = new ArrayList<>();
 		int n = training.getDuration();
 		Date d1 = training.getStartDate();
 		Calendar c1 = Calendar.getInstance();
@@ -56,13 +58,18 @@ public class TrainingDaoImpl implements TrainingDao {
 		}
 		training.setSessions(sessions);
 		String nominationList = training.getNominate();
+		System.out.println("Nomination List"+nominationList);
 		if(nominationList.contains("#"))
 		{
-			training.setTraineeempId(empDao.getEmployeeIdFromGroup(training));
+			List<EmpRecord> list = empDao.getEmployeeIdFromGroup(training);
+			List<Integer> i = new ArrayList<>();
+			for (EmpRecord e : list)
+				i.add(e.getEmpId());
+			training.setTraineeempId(i);
+			System.out.println("Trainee empId: "+training.getTraineeempId());
 		}
 		else
 		{
-			List<Integer> nomination = new ArrayList<>();
 			nomination.add(Integer.parseInt(nominationList));
 			training.setTraineeempId(nomination);
 		}

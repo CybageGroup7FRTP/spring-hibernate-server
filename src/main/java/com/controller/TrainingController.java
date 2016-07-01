@@ -63,7 +63,7 @@ public class TrainingController
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value="/withdrawfortraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/withdrawfromtraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody boolean withdrawFromTraining(@RequestBody Training training)
 	{
 		return trainingService.withdrawFromTraining(training);

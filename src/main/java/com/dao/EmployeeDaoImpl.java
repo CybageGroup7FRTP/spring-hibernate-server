@@ -35,8 +35,8 @@ public class EmployeeDaoImpl implements EmployeeDao
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Integer> getEmployeeIdFromGroup(Training training) {
+	public List<EmpRecord> getEmployeeIdFromGroup(Training training) {
 		
-		return (List<Integer>) sf.openSession().createQuery("from EmpRecord e where e.groupName = :name").setParameter("name", training.getNominate()).list();
+		return  sf.openSession().createQuery("from EmpRecord e where e.groupName = :name").setParameter("name", training.getNominate().replace("#", "")).list();
 	}
 }
