@@ -22,4 +22,7 @@ public interface TrainingDao
 	public List<Training> listmytrainings(User user);
 	public boolean nominateIntoTraining(Training training);
 	public boolean withdrawFromTraining(Training training);
+	public List<Training> trainingsaddedbyme(Training training);
+	public List<Training> trainingsConduct(Training training);
+	
 }

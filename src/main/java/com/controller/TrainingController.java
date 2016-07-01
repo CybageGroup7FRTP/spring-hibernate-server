@@ -69,5 +69,18 @@ public class TrainingController
 		return trainingService.withdrawFromTraining(training);
 	}
 	
+	@CrossOrigin
+	@RequestMapping(value="/trainingsconductedbyme",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Training> trainingsConduct(@RequestBody Training training)
+	{
+		return trainingService.trainingsConduct(training);
+	}
 	
+	@CrossOrigin
+	@RequestMapping(value="/addedtrainings",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Training> trainingsaddedbyme(@RequestBody Training training)
+	{
+		System.out.println("Training Employee Id: "+training.getTrainingExecId());
+		return trainingService.trainingsaddedbyme(training);
+	}
 }
