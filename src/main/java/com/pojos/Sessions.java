@@ -13,6 +13,7 @@ public class Sessions
 	private int sessionNo;
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	@Temporal(TemporalType.TIME)
 	private Date startTime;
 	@Temporal(TemporalType.TIME)
 	private Date endTime;
