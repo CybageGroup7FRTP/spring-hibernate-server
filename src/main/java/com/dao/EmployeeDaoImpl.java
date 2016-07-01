@@ -26,9 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao
 		Session sess = sf.openSession();
 		Transaction tx = sess.getTransaction();
 		tx.begin();
-		System.out.println("User Id: "+training.getTrainId());
 		EmpRecord employee = sess.get(EmpRecord.class, training.getTrainId());
-		System.out.println("Emp Dept: "+employee.getEmpDept());
 		tx.commit();
 		return employee.getEmpDept();
 	}

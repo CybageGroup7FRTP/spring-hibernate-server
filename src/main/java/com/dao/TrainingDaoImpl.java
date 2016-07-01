@@ -153,7 +153,6 @@ public class TrainingDaoImpl implements TrainingDao {
 		Transaction tx = session.beginTransaction();
 		
 		String name = training.getName();
-		session.createQuery("from Session s ").setString("name",name).executeUpdate();
 		List<Sessions> trainingSessions = (List<Sessions>) session.createSQLQuery("select * from Training_sessions where Training_trainId = ?").setInteger(0, training.getTrainId()).list();
 		tx.commit();
 		
