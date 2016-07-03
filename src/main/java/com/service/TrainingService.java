@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.pojos.Sessions;
+import com.pojos.Trainer;
 import com.pojos.Training;
 import com.pojos.User;
 
@@ -20,5 +21,8 @@ public interface TrainingService
 	public boolean withdrawFromTraining(Training training);
 	public List<Training> trainingsaddedbyme(Training training);
 	public List<Training> trainingsConduct(Training training);
+	public String addNomineeToTraining(Training training);
+	public List<Training> mandatoryTraining(Training training);
+	public List<Trainer> trainerWithTechnology(Trainer trainer);
 	
 }
