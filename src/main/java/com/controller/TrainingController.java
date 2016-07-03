@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pojos.Sessions;
+import com.pojos.Trainer;
 import com.pojos.Training;
 import com.pojos.User;
 import com.service.TrainingService;
@@ -66,6 +67,7 @@ public class TrainingController
 	@RequestMapping(value="/withdrawfromtraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody boolean withdrawFromTraining(@RequestBody Training training)
 	{
+		System.out.println("Reached controller");
 		return trainingService.withdrawFromTraining(training);
 	}
 	
@@ -82,5 +84,30 @@ public class TrainingController
 	{
 		System.out.println("Training Employee Id: "+training.getTrainingExecId());
 		return trainingService.trainingsaddedbyme(training);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/addnomination",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody boolean addNomineeToTraining(@RequestBody Training training)
+	{
+		System.out.println("Add nomination got called");
+		String s = trainingService.addNomineeToTraining(training);
+		if(s!=null)
+			return true;
+		return false;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/mandatorytraining",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Training> mandatoryTraining(@RequestBody Training training)
+	{
+		return trainingService.mandatoryTraining(training);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/trainerwithtechnology",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Trainer> trainerWithTechnology(@RequestBody Trainer trainer)
+	{
+		return trainingService.trainerWithTechnology(trainer);
 	}
 }

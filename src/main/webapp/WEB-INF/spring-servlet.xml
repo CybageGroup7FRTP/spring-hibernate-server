@@ -20,6 +20,6 @@
 		p:prefix="/WEB-INF/views/" />
 	 -->	<!-- p:suffix=".html" -->
 	<!-- <mvc:resources location="/WEB-INF/views/" mapping="/WEB-INF/views/**"/> -->
-	<mvc:resources location="/WEB_INF/views/" mapping="/views/**"/>	
+<!-- 	<mvc:resources location="/WEB_INF/views/" mapping="/views/**"/>	 -->
 	 
 </beans>
