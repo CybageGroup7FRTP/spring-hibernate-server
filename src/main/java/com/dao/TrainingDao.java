@@ -30,5 +30,6 @@ public interface TrainingDao
 	public String addNomineeToTraining(Training training);
 	public List<Training> mandatoryTraining(Training training);
 	public List<Trainer> trainerWithTechnology(Trainer trainer);
+	public List<Training> showTraining(Training training);
 	
 }

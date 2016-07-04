@@ -88,4 +88,10 @@ public class TrainingServiceImpl implements TrainingService
 		return trainingDao.trainerWithTechnology(trainer);
 	}
 	
+	@Override
+	public List<Training> showTraining(Training training) {
+		// TODO Auto-generated method stub
+		return trainingDao.showTraining(training);
+	}
+	
 }

@@ -111,4 +111,12 @@ public class TrainingController
 	{
 		return trainingService.trainerWithTechnology(trainer);
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value="/showTrainings",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Training> showTraining(@RequestBody Training training)
+	{
+		System.out.println("showTraining");
+		return trainingService.showTraining(training);
+	}
 }
