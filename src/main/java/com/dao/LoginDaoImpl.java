@@ -38,7 +38,7 @@ public class LoginDaoImpl implements LoginDao
 			System.out.println(" working " + result.get(0).getEmpType());
 			user.setEmpId(result.get(0).getEmpId());
 			user.setEmpType(result.get(0).getEmpType());
-			user.setUsername(result.get(0).getEmpType());
+			user.setUsername(result.get(0).getUsername());
 			return user;
 		} else
 		{

@@ -34,7 +34,7 @@ public class TrainingDaoImpl implements TrainingDao {
 	private EmployeeDao empDao;
 
 	@Override
-	public String registerTraining(Training training) {
+	public Training registerTraining(Training training) {
 		// TODO Auto-generated method stub
 		List<Sessions> sessions = new ArrayList<>();
 		List<Integer> nomination = new ArrayList<>();
@@ -77,7 +77,7 @@ public class TrainingDaoImpl implements TrainingDao {
 		tx.begin();
 		sess.save(training);
 		tx.commit();
-		return null;
+		return training;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -101,6 +101,7 @@ public class TrainingDaoImpl implements TrainingDao {
 		 */
 		List<Training> trainingSet = (List<Training>) q.list();
 		tx.commit();
+		System.out.println("Name of the training"+trainingSet.get(0).getName());
 		return trainingSet;
 
 	}
@@ -212,8 +213,8 @@ public class TrainingDaoImpl implements TrainingDao {
 	public List<Training> trainingsaddedbyme(Training training) {
 		// TODO Auto-generated method stub
 		Session session = sf.openSession();
-		List<Training> traininglist = session.createQuery("from Training t where t.trainingExecId = :trainingExecId")
-				.setParameter("trainingExecId", training.getTrainingExecId()).list();
+		List<Training> traininglist = session.createSQLQuery("select * from  Training where name like ? and trainingExecId = :trainingExecId")
+				.setString(0, "%"+training.getName()+"%").setParameter("trainingExecId", training.getTrainingExecId()).list();
 		System.out.println("Training List" + traininglist);
 		return traininglist;
 	}
