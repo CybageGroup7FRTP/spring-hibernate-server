@@ -101,7 +101,7 @@ public class TrainingDaoImpl implements TrainingDao {
 		 */
 		List<Training> trainingSet = (List<Training>) q.list();
 		tx.commit();
-		System.out.println("Name of the training"+trainingSet.get(0).getName());
+		System.out.println("Name of the training" + trainingSet.get(0).getName());
 		return trainingSet;
 
 	}
@@ -127,17 +127,22 @@ public class TrainingDaoImpl implements TrainingDao {
 
 	@Override
 	@Transactional
-	public String deleteTraining(Training training) {
+	public String deleteTraining(Training training) 
+	{
+
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
 
-		String name = training.getName();
-		String hql = "delete from Training where name =:name";
-		session.createQuery(hql).setString("name", name).executeUpdate();
+		int trainId = training.getTrainId();
+		String hql = "delete from Training where trainId =:trainId";
+		Training t = (Training) session.get(Training.class,training.getTrainId());
+		session.delete(t);
+		//session.createQuery(hql).setLong("trainId", trainId).executeUpdate();
 		tx.commit();
 
 		System.out.println("Deletion Successful");
 		return null;
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -191,21 +196,21 @@ public class TrainingDaoImpl implements TrainingDao {
 	@Override
 	public boolean withdrawFromTraining(Training training) {
 		// TODO Auto-generated method stub
-		try
-		{
-		System.out.println("Reached DAO");
-		Session session = sf.openSession();
-		Transaction tx = session.getTransaction();
-		tx.begin();
-		System.out.println(session
-				.createSQLQuery("delete from Training_traineeempId where traineeempId = ? and Training_trainId = ?")
-				.setInteger(0, Integer.parseInt(training.getNominate())).setInteger(1, training.getTrainId()).executeUpdate());
-		tx.commit();
-		return true;
-		}catch (Exception e) {
+		try {
+			System.out.println("Reached DAO");
+			Session session = sf.openSession();
+			Transaction tx = session.getTransaction();
+			tx.begin();
+			System.out.println(session
+					.createSQLQuery("delete from Training_traineeempId where traineeempId = ? and Training_trainId = ?")
+					.setInteger(0, Integer.parseInt(training.getNominate())).setInteger(1, training.getTrainId())
+					.executeUpdate());
+			tx.commit();
+			return true;
+		} catch (Exception e) {
 			return false;
 		}
-	
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -213,8 +218,10 @@ public class TrainingDaoImpl implements TrainingDao {
 	public List<Training> trainingsaddedbyme(Training training) {
 		// TODO Auto-generated method stub
 		Session session = sf.openSession();
-		List<Training> traininglist = session.createSQLQuery("select * from  Training where name like ? and trainingExecId = :trainingExecId")
-				.setString(0, "%"+training.getName()+"%").setParameter("trainingExecId", training.getTrainingExecId()).list();
+		List<Training> traininglist = session
+				.createSQLQuery("select * from  Training where name like ? and trainingExecId = :trainingExecId")
+				.setString(0, "%" + training.getName() + "%")
+				.setParameter("trainingExecId", training.getTrainingExecId()).list();
 		System.out.println("Training List" + traininglist);
 		return traininglist;
 	}
@@ -238,16 +245,16 @@ public class TrainingDaoImpl implements TrainingDao {
 	@Override
 	public String addNomineeToTraining(Training training) {
 		try {
-			System.out.println("Dao got called for training "+training.getTrainId());
+			System.out.println("Dao got called for training " + training.getTrainId());
 			Session session = sf.openSession();
 			Transaction tx = session.beginTransaction();
 			tx.begin();
 			Training trainingList = session.load(Training.class, training.getTrainId());
-			System.out.println("Training Id: "+trainingList.getTrainId());
+			System.out.println("Training Id: " + trainingList.getTrainId());
 			List<Integer> nomineeList = trainingList.getTraineeempId();
-			System.out.println("Nomination List"+nomineeList);
+			System.out.println("Nomination List" + nomineeList);
 			String nominationList = training.getNominate();
-			System.out.println("What we send as nominne is: "+nominationList);
+			System.out.println("What we send as nominne is: " + nominationList);
 			if (nominationList.contains("#")) {
 				List<EmpRecord> list = empDao.getEmployeeIdFromGroup(training);
 				if (list == null)
@@ -262,8 +269,8 @@ public class TrainingDaoImpl implements TrainingDao {
 				// No Employee with such empid msg
 				System.out.println("I came at the end");
 				User u = session.get(User.class, Integer.parseInt(training.getNominate()));
-				System.out.println("User Object"+u);
-				if ( u != null) {
+				System.out.println("User Object" + u);
+				if (u != null) {
 					nomineeList.add(Integer.parseInt(nominationList));
 					tx.commit();
 					return "Nominee Added";
@@ -276,7 +283,7 @@ public class TrainingDaoImpl implements TrainingDao {
 		}
 		return "No such employee to add";
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Training> mandatoryTraining(Training training) {
@@ -285,37 +292,44 @@ public class TrainingDaoImpl implements TrainingDao {
 		List<Integer> list = session
 				.createSQLQuery("select Training_trainId from Training_traineeempId where traineeempId = ?")
 				.setInteger(0, Integer.parseInt(training.getNominate())).list();
-		
+
 		for (Integer i : list) {
 			Training training2 = session.get(Training.class, i);
 			trainingList.add(training2);
 		}
 		return trainingList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Trainer> trainerWithTechnology(Trainer trainer)
-	{
-		System.out.println("Trainer technology: "+trainer.getName());
+	public List<Trainer> trainerWithTechnology(Trainer trainer) {
+		System.out.println("Trainer technology: " + trainer.getName());
 		Session session = sf.openSession();
 		List<Trainer> trainersList = session
 				.createQuery("select t from Trainer t join t.technology tech where tech = :tech")
 				.setParameter("tech", trainer.getName()).list();
 		return trainersList;
 	}
-	
-	
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Training> trainingsByTrainer(Training training)
-	{
+	public List<Training> trainingsByTrainer(Training training) {
 		Session session = sf.openSession();
-		List<Training> list = session
-				.createQuery("from Training t where traineeempId = :trainee").list();
-		if(list!=null)
+		List<Training> list = session.createQuery("from Training t where traineeempId = :trainee").list();
+		if (list != null)
 			return list;
 		else
 			return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Training> showTraining(Training training) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		tx.begin();
+		List<Training> table = session.createQuery("From Training t where t.trainingExecId = :trainerId").setParameter("trainerId", training.getTrainingExecId()).list();
+		tx.commit();
+		System.out.println("Training DAO" +table);
+		return table;
 	}
 }
