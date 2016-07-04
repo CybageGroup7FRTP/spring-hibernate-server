@@ -61,17 +61,5 @@ public class LoginController
 		System.out.println("Session Time: "+request.getSession().getCreationTime());
 		return u;
 	} 
-	
-	
-	@CrossOrigin
-	@RequestMapping(value="/mysession",method=RequestMethod.POST)
-	public @ResponseBody User yourSession()
-	{
-		session = request.getSession();
-		System.out.println("Session Time: "+session.getCreationTime());
-		System.out.println("Session: "+session.getAttributeNames().nextElement());
-		User user = (User) request.getSession().getAttribute("user");
-		System.out.println("UserAttributeFromSession: "+user);
-		return user;
-	}
+
 }

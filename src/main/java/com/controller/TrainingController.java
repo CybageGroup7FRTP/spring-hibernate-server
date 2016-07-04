@@ -28,8 +28,8 @@ public class TrainingController
 	public @ResponseBody Training registerTraining(@RequestBody Training training)
 	{
 		System.out.println(training.getName());
-		trainingService.registerTraining(training);
-		return new Training();
+		Training training2 = trainingService.registerTraining(training);
+		return training2;
 	}
 	
 	@CrossOrigin
@@ -92,6 +92,7 @@ public class TrainingController
 	{
 		System.out.println("Add nomination got called");
 		String s = trainingService.addNomineeToTraining(training);
+		System.out.println("Nomination List: "+s);
 		if(s!=null)
 			return true;
 		return false;

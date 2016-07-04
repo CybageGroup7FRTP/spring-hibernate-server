@@ -17,7 +17,7 @@ import com.pojos.User;
 public interface TrainingDao 
 {
 
-	public String registerTraining(Training training);
+	public Training registerTraining(Training training);
 	public List<Training> searchTraining(Training training);
 	public String deleteTraining(Training training);
 	public String validateUser(User user);	

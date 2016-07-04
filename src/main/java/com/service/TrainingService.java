@@ -13,7 +13,7 @@ import com.pojos.User;
 @Service
 public interface TrainingService
 {
-	public String registerTraining(Training training);
+	public Training registerTraining(Training training);
 	public List<Training> searchTraining(Training training);
 	public String deleteTraining(Training training);
 	public List<Sessions> listSessions(Training trianing);

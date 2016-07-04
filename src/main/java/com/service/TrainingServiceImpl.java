@@ -19,7 +19,7 @@ public class TrainingServiceImpl implements TrainingService
 	private TrainingDao trainingDao;
 	
 	@Override
-	public String registerTraining(Training training) {
+	public Training registerTraining(Training training) {
 		// TODO Auto-generated method stub
 		return trainingDao.registerTraining(training);
 	}
