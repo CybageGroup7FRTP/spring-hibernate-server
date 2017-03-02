@@ -21,7 +21,7 @@ insert into Trainer values (102,TRUE,"asfiya",2);
 insert into Trainer_technology values (101,"Spring");
 insert into Trainer_technology values (102,"Java");
 
-
+Trying to push from another remote
 
 
 
