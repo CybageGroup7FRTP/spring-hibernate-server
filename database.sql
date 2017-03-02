@@ -24,5 +24,5 @@ insert into Trainer_technology values (102,"Java");
 Trying to push from another remote
 
 
-
+My change 
 
